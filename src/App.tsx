@@ -46,6 +46,7 @@ function App() {
         tasks[todoListID] = tasks[todoListID].filter(t => t.id !== taskID)
         setTasks({...tasks}) //перерисовка если есть изменения
     }
+
     function addTask(title: string, todoListID: string) {
         const newTask: TaskType = {
             id: v1(),
@@ -57,6 +58,7 @@ function App() {
         tasks[todoListID] = [newTask, ...todoListTasks]
         setTasks({...tasks})
     }
+
     function changeTaskStatus(taskID: string, newIsDoneValue: boolean, todoListID: string) {
         const todoListTasks = tasks[todoListID]
         const task = todoListTasks.find(t => t.id === taskID)
@@ -67,6 +69,18 @@ function App() {
             setTasks({...tasks}) //складываем таски в объект
         }
     }
+
+    function changeTaskTitle(taskID: string, newTitle: string, todoListID: string) {
+        const todoListTasks = tasks[todoListID]
+        const task = todoListTasks.find(t => t.id === taskID)
+        //false -> undefined, null, 0, '', NaN
+        //true -> {}, []
+        if (task) {
+            task.title = newTitle
+            setTasks({...tasks}) //складываем таски в объект
+        }
+    }
+
     function changeFilter(newFilterValue: FilterValuesType, todoListID: string) {
         const todoList = todoLists.find(tl => tl.id === todoListID)
         if (todoList) {
@@ -74,6 +88,15 @@ function App() {
             setTodoLists([...todoLists])
         }
     }
+
+    function changeTodolistTitle(newTitle: string, todoListID: string) {
+        const todoList = todoLists.find(tl => tl.id === todoListID)
+        if (todoList) {
+            todoList.title = newTitle
+            setTodoLists([...todoLists])
+        }
+    }
+
     function removeTodoList(todoListID: string) {
         setTodoLists(todoLists.filter(tl => tl.id !== todoListID))
         delete tasks[todoListID]
@@ -87,7 +110,7 @@ function App() {
             filter: "all"
         }
         setTodoLists([...todoLists, newTodolist])
-        setTasks({...tasks, [newTodoListID]:[]})
+        setTasks({...tasks, [newTodoListID]: []})
     }
 
     //UI
@@ -107,18 +130,20 @@ function App() {
                       title={tl.title}
                       tasks={tasksForTodolist}
                       addTask={addTask}
-                      removeTask={removeTask}
+                      filter={tl.filter}
                       changeFilter={changeFilter}
                       changeTaskStatus={changeTaskStatus}
-                      filter={tl.filter}
+                      changeTaskTitle={changeTaskTitle}
+                      removeTask={removeTask}
                       removeTodoList={removeTodoList}
+                      changeTodolistTitle={changeTodolistTitle}
             />
         )
     })
 
     return (
         <div className="App">
-            <AddItemForm addItem = {addTodoList}/>
+            <AddItemForm addItem={addTodoList}/>
             {todoListComponents}
         </div>
     );
