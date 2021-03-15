@@ -3,7 +3,7 @@ import './App.css';
 import TodoList from "./TodoList";
 import {v1} from 'uuid';
 import {AddItemForm} from "./AddItemForm";
-import {AppBar, Button, Container, Grid, IconButton, Paper, TextField, Toolbar, Typography} from "@material-ui/core";
+import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons"
 
 export type TaskType = {
@@ -161,7 +161,7 @@ function App() {
 
             <Container fixed>
                 <Grid container style={{padding: "10px"}}>
-                    <AddItemForm addItem={addTodoList}/>
+                    <AddItemForm addItem={addTodoList} helperText={"Add new TDL title"}/>
                 </Grid>
                 <Grid container spacing={3}>
                     {todoListComponents}

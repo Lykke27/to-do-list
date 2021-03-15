@@ -4,6 +4,7 @@ import {Add} from "@material-ui/icons";
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
+    helperText: string
 }
 
 export function AddItemForm(props: AddItemFormPropsType) {
@@ -33,7 +34,7 @@ export function AddItemForm(props: AddItemFormPropsType) {
     return (
         <div>
             <TextField
-                label={"Add title"}
+                label={props.helperText}
                 value={title}
                 onChange={changeTitle}
                 onKeyPress={onKeyPressAddItem}

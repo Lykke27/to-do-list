@@ -72,7 +72,7 @@ function TodoList(props: TodoListPropsType) {
                 </IconButton>
             </h3>
 
-            <AddItemForm addItem={addTask}/>
+            <AddItemForm addItem={addTask} helperText={"Add new task title"}/>
             <div>
                 {tasks}
             </div>
