@@ -24,7 +24,6 @@ export function EditableSpan(props: EditableSpanPropsType) {
     }
 
     return (
-
         editMode
             ? <TextField
                 value={title}

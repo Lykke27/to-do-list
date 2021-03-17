@@ -126,8 +126,8 @@ function App() {
         }
 
         return (
-            <Grid item>
-                <Paper style={{padding: "10px"}}>
+            <Grid item key={tl.id}>
+                <Paper style={{padding: "10px"}} elevation={10}>
                     <TodoList todoListID={tl.id}
                               title={tl.title}
                               tasks={tasksForTodolist}
@@ -160,8 +160,10 @@ function App() {
             </AppBar>
 
             <Container fixed>
-                <Grid container style={{padding: "10px"}}>
-                    <AddItemForm addItem={addTodoList} helperText={"Add new TDL title"}/>
+                <Grid container style={{padding: "15px 0px"}}>
+                    <Paper style={{padding: "10px"}} elevation={10}>
+                        <AddItemForm addItem={addTodoList} helperText={"Add new list title"}/>
+                    </Paper>
                 </Grid>
                 <Grid container spacing={3}>
                     {todoListComponents}
