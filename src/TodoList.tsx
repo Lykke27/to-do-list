@@ -63,9 +63,8 @@ function TodoList(props: TodoListPropsType) {
 
     return (
         <div>
-            <h3>
+            <h3 style={{margin: "5px"}}>
                 <EditableSpan title={props.title} changeTitle={changeTodoListTitle}/>
-
                 <IconButton
                     onClick={removeTodoList}>
                     <Delete/>

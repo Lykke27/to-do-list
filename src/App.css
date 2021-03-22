@@ -1,16 +1,9 @@
 .is-done {
-  opacity: 0.35;
+    opacity: 0.5;
+    text-decoration: line-through;
+
 }
 
 .active {
-  background-color: #726161;
+    background-color: #726161;
 }
-
-/*.error {*/
-/*  border: 2px solid red;*/
-/*  outline: transparent;*/
-/*}*/
-
-/*.error-message {*/
-/*  color: red;*/
-/*}*/
