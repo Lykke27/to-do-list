@@ -1,4 +1,4 @@
-import {todolistReducer} from './tl-reducer';
+import {AddTodolistAC, todolistReducer} from './tl-reducer';
 import {v1} from 'uuid';
 import {TodoListType} from '../App';
 
@@ -28,7 +28,7 @@ test('correct todolist should be added', () => {
         {id: todolistId2, title: "What to buy", filter: "all"}
     ]
 
-    const endState = todolistReducer(startState, { type: 'ADD-TODOLIST', title: newTodolistTitle})
+    const endState = todolistReducer(startState, AddTodolistAC(newTodolistTitle))
 
     expect(endState.length).toBe(3);
     expect(endState[2].title).toBe(newTodolistTitle);
