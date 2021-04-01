@@ -2,7 +2,7 @@ import {v1} from "uuid";
 import {FilterValuesType, TaskType, TodoListType} from "../App";
 import {act} from "react-dom/test-utils";
 
-type RemoveTodoListActionType = {
+export type RemoveTodoListActionType = {
     type: "REMOVE-TODOLIST",
     id: string
 }
