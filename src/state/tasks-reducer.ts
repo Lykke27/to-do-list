@@ -1,13 +1,12 @@
 import {v1} from "uuid";
 import {TaskStateType, TaskType, TodoListType} from "../App";
-import {AddTodoListActionType, RemoveTodoListActionType} from "./tl-reducer";
+import {AddTodoListActionType, RemoveTodoListActionType} from "./tlReducer";
 
 type RemoveTaskActionType = {
     type: "REMOVE-TASK",
     taskId: string,
     todolistId: string
 }
-
 type AddTaskActionType = {
     type: "ADD-TASK"
     title: string
@@ -40,7 +39,6 @@ export const tasksReducer = (state: TaskStateType, action: ActionsType) => {
             copyState[action.todolistId] = copyState[action.todolistId].filter(task => task.id !== action.taskId)
             return copyState
         }
-
         case "ADD-TASK": {
             const newTask: TaskType = {
                 id: v1(),
@@ -51,7 +49,6 @@ export const tasksReducer = (state: TaskStateType, action: ActionsType) => {
             copyState[action.todolistId] = [newTask, ...state[action.todolistId]]
             return copyState
         }
-
         case "CHANGE-STATUS": {
             const todoListTasks = state[action.todolistId]
             const task = todoListTasks.find(t => t.id === action.id)
@@ -76,13 +73,11 @@ export const tasksReducer = (state: TaskStateType, action: ActionsType) => {
             let todolistId = action.todolistId
             return {...state, [todolistId]: []}
         }
-
-        case "REMOVE-TODOLIST":{
+        case "REMOVE-TODOLIST": {
             let copyState = {...state}
             delete copyState[action.id]
             return copyState
         }
-
         default:
             return state
     }

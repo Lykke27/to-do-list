@@ -1,4 +1,4 @@
-import {AddTodolistAC, todolistReducer} from './tl-reducer';
+import {AddTodolistAC, todolistReducer} from './tlReducer';
 import {v1} from 'uuid';
 import {TodoListType} from '../App';
 
