@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useCallback} from 'react';
 import {FilterValuesType, TaskType} from "./App";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
@@ -19,22 +19,32 @@ type TodoListPropsType = {
     changeTodolistTitle: (newTitle: string, todoListID: string) => void
 }
 
-function TodoList(props: TodoListPropsType) {
-
-    const addTask = (title: string) => props.addTask(title, props.todoListID)
+const TodoList = React.memo((props: TodoListPropsType) => {
+    //пропсы деструктуризацией
+    console.log("To do list")
+    const addTask = useCallback ((title: string) => props.addTask(title, props.todoListID),[props.todoListID, props.addTask])
     const removeTodoList = () => props.removeTodoList(props.todoListID)
-    const setAllFilter = () => {
-        props.changeFilter("all", props.todoListID)
-    }
-    const setActiveFilter = () => {
-        props.changeFilter("active", props.todoListID)
-    }
-    const setCompletedFilter = () => {
-        props.changeFilter("completed", props.todoListID)
-    }
-    const changeTodoListTitle = (title: string) => props.changeTodolistTitle(title, props.todoListID)
+    const changeTodoListTitle = useCallback((title: string) => props.changeTodolistTitle(title, props.todoListID),[props.changeTodolistTitle,props.todoListID])
 
-    const tasks = props.tasks.map(t => {
+    const setAllFilter = useCallback( () => {
+        props.changeFilter("all", props.todoListID)
+    },[props.todoListID])
+    const setActiveFilter = useCallback( () => {
+        props.changeFilter("active", props.todoListID)
+    },[props.todoListID])
+    const setCompletedFilter = useCallback( () => {
+        props.changeFilter("completed", props.todoListID)
+    },[props.todoListID])
+
+    let tasksForTodolist = props.tasks;
+    if (props.filter === "active") {
+        tasksForTodolist = props.tasks.filter(t => t.isDone ===false)
+    }
+    if (props.filter === "completed") {
+        tasksForTodolist =  props.tasks.filter(t => t.isDone === true)
+    }
+
+    const tasks = tasksForTodolist.map(t => {
         const removeTask = () => {
             props.removeTask(t.id, props.todoListID)
         }
@@ -61,6 +71,7 @@ function TodoList(props: TodoListPropsType) {
         )
     })
 
+
     return (
         <div>
             <h3 style={{margin: "5px"}}>
@@ -75,6 +86,7 @@ function TodoList(props: TodoListPropsType) {
             <div>
                 {tasks}
             </div>
+
             <div>
                 <Button variant={props.filter === "all" ? "contained" : "text"}
                         onClick={setAllFilter}>
@@ -85,7 +97,6 @@ function TodoList(props: TodoListPropsType) {
                         onClick={setActiveFilter}>
                     Active
                 </Button>
-
                 <Button variant={props.filter === "completed" ? "contained" : "text"}
                         onClick={setCompletedFilter}>
                     Completed
@@ -93,6 +104,6 @@ function TodoList(props: TodoListPropsType) {
             </div>
         </div>
     )
-}
+})
 
 export default TodoList;
