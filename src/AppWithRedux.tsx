@@ -68,8 +68,6 @@ function AppWithRedux() {
     //UI
     // Create Read Update Delete
     const todoListComponents = todoLists.map(tl => {
-
-
         return (
             <Grid item key={tl.id}>
                 <Paper style={{padding: "10px"}} elevation={10}>
