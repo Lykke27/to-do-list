@@ -96,7 +96,7 @@ function AppWithRedux() {
                         <Menu/>
                     </IconButton>
                     <Typography variant="h6">
-                        To-do list App
+                        Todolist App
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>

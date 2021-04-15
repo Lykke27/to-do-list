@@ -46,7 +46,6 @@ const TodoList = React.memo((props: TodoListPropsType) => {
     }
 
     const tasks = tasksForTodolist.map(t =>
-
         <Task
         key={t.id}
         task={t}
@@ -55,7 +54,6 @@ const TodoList = React.memo((props: TodoListPropsType) => {
         changeTaskStatus={props.changeTaskStatus}
         todoListID={props.todoListID}
     />)
-
 
     return (
         <div>
@@ -72,17 +70,19 @@ const TodoList = React.memo((props: TodoListPropsType) => {
                 {tasks}
             </div>
 
-            <div>
-                <Button variant={props.filter === "all" ? "contained" : "text"}
+            <div style={{marginTop: "5px"}}>
+                <Button variant={props.filter === "all" ? "outlined" : "text"}
                         onClick={setAllFilter}>
                     All
                 </Button>
 
-                <Button variant={props.filter === "active" ? "contained" : "text"}
+                <Button variant={props.filter === "active" ? "outlined" : "text"}
+                        color={"primary"}
                         onClick={setActiveFilter}>
                     Active
                 </Button>
-                <Button variant={props.filter === "completed" ? "contained" : "text"}
+                <Button variant={props.filter === "completed" ? "outlined" : "text"}
+                        color={"secondary"}
                         onClick={setCompletedFilter}>
                     Completed
                 </Button>
